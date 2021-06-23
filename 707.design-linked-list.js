@@ -6,10 +6,20 @@
 
 // @lc code=start
 /**
+ * 
+ * @param {number} value 
+ * @param {LinkItem} next 
+ */
+ function LinkItem(value, next) {
+    this.value = value;
+    this.next = next;
+}
+
+/**
  * Initialize your data structure here.
  */
 var MyLinkedList = function() {
-    
+    this.head = null;
 };
 
 /**
@@ -18,7 +28,17 @@ var MyLinkedList = function() {
  * @return {number}
  */
 MyLinkedList.prototype.get = function(index) {
-    
+    console.log(`--- get ---`);
+    let current = this.head;
+    let currentIndex = 0;    
+    while(current !== null) {
+        console.log(`current: ${current.value}`);
+        if(currentIndex === index) {
+            return current.value;
+        }
+        current = current.next;
+        currentIndex++;
+    }    
 };
 
 /**
@@ -27,7 +47,8 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
-    
+    let previousHead = this.head;
+    this.head = new LinkItem(val, previousHead);
 };
 
 /**
@@ -36,7 +57,11 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function(val) {
-    
+    let current = this.head;
+    while(current.next !== null) {
+        current = current.next;
+    }
+    current.next = new LinkItem(val, null);
 };
 
 /**
@@ -46,6 +71,17 @@ MyLinkedList.prototype.addAtTail = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtIndex = function(index, val) {
+    let current = this.head;
+    let currentIndex = 0;
+    while(current !== null) {
+        if (currentIndex = index) {
+            let formerNext = current.next;
+            current.next = new LinkItem(val, formerNext);
+            break;
+        }
+        current = current.next;
+        currentIndex++;
+    }
     
 };
 
@@ -55,8 +91,25 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @return {void}
  */
 MyLinkedList.prototype.deleteAtIndex = function(index) {
-    
+    console.log(`--- deleteAtIndex ---`);
+    let current = this.head;
+    let currentIndex = 0;
+    while(current !== null) {
+        console.log(`current: ${current.value}`);
+        if ((currentIndex+1) === index) {
+            // let afterDeleted = current.next.next;
+            console.log(`next: ${current.next.value}`);
+            // let formerNext = current.next.next;
+            console.log(`former next: ${current.next.next.value}`);
+            current.next = current.next.next;
+            break;
+        }
+        current = current.next;
+        currentIndex++;
+    } 
 };
+
+
 
 /** 
  * Your MyLinkedList object will be instantiated and called as such:
@@ -69,3 +122,7 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
  */
 // @lc code=end
 
+
+// @after-stub-for-debug-begin
+module.exports = MyLinkedList;
+// @after-stub-for-debug-end
