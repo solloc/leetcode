@@ -25,6 +25,9 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function(headA, headB) {
+    /**
+     * @type {Set<ListNode>}
+     */
     let setA = new Set();
     let currentHeadA = headA;
     while (currentHeadA) {
@@ -35,6 +38,9 @@ var getIntersectionNode = function(headA, headB) {
         currentHeadA = currentHeadA.next;
     }
 
+    /**
+     * @type {Set<ListNode>}
+     */
     let setB = new Set();
     let currentHeadB = headB;
     while (currentHeadB) {
