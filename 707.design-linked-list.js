@@ -14,6 +14,10 @@ var ListNode = function() {
     this.next = null;   
 }
 
+ListNode.prototype.toString = function() {
+    return `${this.val}`;
+}
+
 /**
  * Initialize your data structure here.
  */
@@ -30,6 +34,22 @@ var ListNode = function() {
  * @return {number}
  */
 MyLinkedList.prototype.get = function(index) {
+    console.log(`Get [${index}]: ${this.toString()}`);
+    let current = this.head;
+    let currentIndex = 0;
+    while (current) {
+        if (currentIndex === index) {
+            break;
+        }
+        current = current.next;
+        currentIndex++;
+    }
+    if (current) {
+        return current.val;
+    } else {
+        return -1;
+    }
+    
 };
 
 /**
@@ -38,6 +58,7 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
+    // console.log(`Add ${val} at head: ${this.toString()}`);
     let prevHead = this.head;
 
     let newNode = new ListNode();
@@ -45,7 +66,12 @@ MyLinkedList.prototype.addAtHead = function(val) {
     newNode.next = prevHead;
     this.head = newNode;
 
-    prevHead.prev = this.head;
+    if (prevHead) {
+        prevHead.prev = this.head;
+    } else {
+        this.tail = this.head;
+    }
+    // console.log(`--> ${this.toString()}`);
 };
 
 /**
@@ -54,6 +80,14 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function(val) {
+    // console.log(`Add ${val} at tail: ${this.toString()}`);
+
+    if (!this.head) {
+        this.addAtHead(val);
+        return;
+    }
+
+    // console.log(`Tail: ${this.tail}`);
     let prevTail = this.tail;
 
     let newTail = new ListNode();
@@ -63,6 +97,7 @@ MyLinkedList.prototype.addAtTail = function(val) {
     prevTail.next = newTail;
 
     this.tail = newTail;
+    // console.log(`--> ${this.toString()}`);
 };
 
 /**
@@ -72,8 +107,50 @@ MyLinkedList.prototype.addAtTail = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtIndex = function(index, val) {
+    console.log(`Add ${val} at [${index}]: ${this.toString()}`);
+
+    if (!this.head) {
+        this.addAtHead(val);
+        return;
+    }
+
+    if (index === 0) {
+        this.addAtHead(val);
+        return;
+    }
+
     let newNode = new ListNode();
-    newNode.val = val;    
+    newNode.val = val;
+
+    let current = this.head;
+    let currentIndex = 0;
+
+    while (current) {
+        if (currentIndex === index) {
+            break;
+        }
+        current = current.next;
+        currentIndex++;        
+    }
+
+    if (current) {
+        newNode.prev = current.prev;
+        newNode.next = current;
+        let prev = current.prev;
+        // if (prev) {
+            current.prev = newNode;
+            prev.next = newNode;            
+        // }
+        // if (current === this.tail) {
+        //     this.tail = newNode;
+        // }
+    } else {
+        newNode.prev = this.tail;
+        this.tail.next = newNode;
+        this.tail = newNode;
+    }
+
+    console.log(`--> ${this.toString()}`);
 };
 
 /**
@@ -82,8 +159,48 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @return {void}
  */
 MyLinkedList.prototype.deleteAtIndex = function(index) {
-    
+    let current = this.head;
+    let currentIndex = 0;
+
+    while (current) {
+        if (currentIndex === index) {
+            break;
+        }
+        
+        current = current.next;
+        currentIndex++;
+    }
+
+    if (current) {
+        let prev = current.prev;
+        let next = current.next;
+
+        if (prev) {
+            prev.next = next;
+        }        
+        if (next) {
+            next.prev = prev;   
+        }  
+
+        if (current === this.tail) {
+            this.tail = prev;
+        }
+
+        if (current === this.head) {
+            this.head = next;            
+        }
+    }    
 };
+
+MyLinkedList.prototype.toString = function() {
+    let current = this.head;
+    let listContent = Array();
+    while (current) {
+        listContent.push(current.val);
+        current = current.next;
+    }
+    return listContent.toString();
+}
 
 /** 
  * Your MyLinkedList object will be instantiated and called as such:
