@@ -5,11 +5,23 @@
  */
 
 // @lc code=start
+var ListNode = function() {
+    /** @type {number} */
+    this.val = null;
+    /** @type {ListNode} */
+    this.prev = null;
+    /** @type {ListNode} */
+    this.next = null;   
+}
+
 /**
  * Initialize your data structure here.
  */
  var MyLinkedList = function() {
-    
+     /** @type {ListNode} */
+     this.head = null;    
+     /** @type {ListNode} */
+     this.tail = null;
 };
 
 /**
@@ -18,7 +30,6 @@
  * @return {number}
  */
 MyLinkedList.prototype.get = function(index) {
-    
 };
 
 /**
@@ -27,7 +38,14 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
-    
+    let prevHead = this.head;
+
+    let newNode = new ListNode();
+    newNode.val = val;
+    newNode.next = prevHead;
+    this.head = newNode;
+
+    prevHead.prev = this.head;
 };
 
 /**
@@ -36,7 +54,15 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function(val) {
-    
+    let prevTail = this.tail;
+
+    let newTail = new ListNode();
+    newTail.val = val;
+    newTail.prev = prevTail;
+
+    prevTail.next = newTail;
+
+    this.tail = newTail;
 };
 
 /**
@@ -46,7 +72,8 @@ MyLinkedList.prototype.addAtTail = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtIndex = function(index, val) {
-    
+    let newNode = new ListNode();
+    newNode.val = val;    
 };
 
 /**
