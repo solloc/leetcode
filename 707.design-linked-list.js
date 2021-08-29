@@ -6,20 +6,10 @@
 
 // @lc code=start
 /**
- * 
- * @param {number} value 
- * @param {LinkItem} next 
- */
- function LinkItem(value, next) {
-    this.value = value;
-    this.next = next;
-}
-
-/**
  * Initialize your data structure here.
  */
-var MyLinkedList = function() {
-    this.head = null;
+ var MyLinkedList = function() {
+    
 };
 
 /**
@@ -28,24 +18,7 @@ var MyLinkedList = function() {
  * @return {number}
  */
 MyLinkedList.prototype.get = function(index) {
-    console.log(`--- get ---`);
-    this.toString();
-    let current = this.head;
-    let currentIndex = 0;    
-    let retValue = null;
-    while(current !== null) {
-        // console.log(`current: ${current.value}`);
-        if(currentIndex === index) {
-            retValue = current.value;
-            // return current.value;
-        }
-        current = current.next;
-        currentIndex++;
-    }    
-    if (retValue === null) {
-        retValue = -1;
-    }
-    return retValue;
+    
 };
 
 /**
@@ -54,8 +27,7 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
-    let previousHead = this.head;
-    this.head = new LinkItem(val, previousHead);
+    
 };
 
 /**
@@ -64,15 +36,7 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function(val) {
-    let current = this.head;
-    if (current === null) {
-        this.head = new LinkItem(val, null);
-        return;
-    }
-    while(current.next !== null) {
-        current = current.next;
-    }
-    current.next = new LinkItem(val, null);
+    
 };
 
 /**
@@ -82,30 +46,7 @@ MyLinkedList.prototype.addAtTail = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtIndex = function(index, val) {
-    console.log(`--- addAtIndex --- ${index},${val}`);
-    this.toString();
-    if (index === 0) {
-        this.addAtHead(val);
-        return;
-    }
-    let current = this.head;
-    let currentIndex = 0;
-    while(current !== null) {
-        if (currentIndex+1 === index) {
-            let formerNext = current.next;
-            current.next = new LinkItem(val, formerNext);
-            this.toString();
-            return;
-        }
-        current = current.next;
-        currentIndex++;
-    }
     
-    this.toString();
-    if (currentIndex === index) {
-        this.addAtTail(val);
-    }    
-    this.toString();
 };
 
 /**
@@ -114,47 +55,8 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @return {void}
  */
 MyLinkedList.prototype.deleteAtIndex = function(index) {
-    console.log(`--- deleteAtIndex ---`);
-    this.toString();
-    if (index === 0) {
-        this.head = this.head.next;
-        return;   
-    }
-
-    let current = this.head;
-    let currentIndex = 0;
-    while(current !== null) {
-        // console.log(`current: ${current.value}`);
-        if ((currentIndex+1) === index) {
-            // let afterDeleted = current.next.next;
-            // let formerNext = current.next.next;
-            
-            if(current.next !== null) {
-                console.log(`next: ${current.next.value}`);
-                if(current.next.next !== null) {
-                    console.log(`former next: ${current.next.next.value}`);
-                }                
-                current.next = current.next.next;                
-            }            
-            break;
-        }
-        current = current.next;
-        currentIndex++;
-    } 
+    
 };
-
-MyLinkedList.prototype.toString = function() {
-    // console.log(`--- toString ---`);
-    let current = this.head;
-    let value = '';
-    while (current !== null) {
-        value = `${value},${current.value}`;
-        current = current.next;
-    }
-    console.log(`${value}`);
-};
-
-
 
 /** 
  * Your MyLinkedList object will be instantiated and called as such:
@@ -167,7 +69,3 @@ MyLinkedList.prototype.toString = function() {
  */
 // @lc code=end
 
-
-// @after-stub-for-debug-begin
-module.exports = MyLinkedList;
-// @after-stub-for-debug-end
