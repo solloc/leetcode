@@ -45,6 +45,7 @@ var addTwoNumbers = function(l1, l2) {
             currentL2 = currentL2.next;
         }    
 
+        /** @type {ListNode} */
         let newDigit = new ListNode();
 
         let sum = val1 + val2 + carryOver;
